@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 
 const getGreeting = () => {
   const hour = new Date().getHours();
@@ -8,13 +8,23 @@ const getGreeting = () => {
   return 'Good evening';
 };
 
-const Greeting = () => {
+const Greeting = (props) => {
 
     const [greeting, setGreeting] = useState(getGreeting());
     
+    useEffect(() => {
+        // Update the greeting every minute in case the time changes while they are on the page
+        const interval = setInterval(() => {
+        setGreeting(getGreeting());
+        }, 60000); 
+
+        // Clean up the interval on component unmount
+        return () => clearInterval(interval);
+    }, []);
+
     return (
         <div className="greeting-container">
-        <h3>{greeting}!</h3>
+        <h3>{greeting}, {props.name}!</h3>
         </div>
     );
 
