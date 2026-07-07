@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import Header from "./Header";
 
 function Layout({ children }) {
   const navLinks = [
@@ -11,7 +12,8 @@ function Layout({ children }) {
   ];
 
   return (
-    <div>
+    <div className="app-container" style={{fontFamily: "sans-serif"}}>
+      <Header/>
       <nav>
         {navLinks.map((link) => (
           <NavLink key={link.name} to={link.path} style={{ marginRight: "1rem" }}>
