@@ -13,12 +13,11 @@ const Greeting = (props) => {
     const [greeting, setGreeting] = useState(getGreeting());
     
     useEffect(() => {
-        // Update the greeting every minute in case the time changes while they are on the page
+        
         const interval = setInterval(() => {
         setGreeting(getGreeting());
         }, 60000); 
 
-        // Clean up the interval on component unmount
         return () => clearInterval(interval);
     }, []);
 
