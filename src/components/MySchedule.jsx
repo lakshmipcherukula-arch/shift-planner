@@ -1,6 +1,6 @@
 import React from "react";
 
-function MySchedule({ schedule }) {
+function MySchedule({ schedule,onDropShift }) {
   const selectedShifts = Array.isArray(schedule) ? schedule : [];
 
   return (
@@ -25,6 +25,16 @@ function MySchedule({ schedule }) {
               <p><strong>End Time:</strong> {shift.endTime}</p>
               <p><strong>Hours:</strong> {shift.hours}</p>
               <span style={{ color: "#0070f3", fontWeight: "bold" }}>Selected</span>
+              <button 
+                  onClick={() => onDropShift(shift.id)}
+                  style={{ backgroundColor: "#ff4d4d",
+                           color: "#fff",
+                           border: "none",
+                           padding:"0.4rem 0.8rem",
+                           borderRadius:"4px",
+                           cursor:"pointer",
+                           fontWeight:"bold"
+                  }}>Drop Shift</button>
             </div>
           ))}
         </div>
