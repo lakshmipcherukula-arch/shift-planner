@@ -21,21 +21,19 @@ function App() {
       alert("Shift selected successfully");
     }
   };
+  const handleDropShift = (id) =>{
+    const shiftToDrop = mySchedule.find((shift) => shift.id === id);
+    if(shiftToDrop)
+    setMySchedule(mySchedule.filter((shift) => shift.id !== id));
+    setavailableShifts([...availableShifts,shiftToDrop]);
+  };
   return (
     <BrowserRouter>
       <Layout>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/schedule" element={<MySchedule schedule={mySchedule} />} />
-          <Route 
-            path="/find-shifts" 
-            element={
-              <FindShifts 
-                shifts={availableShifts} 
-                onSelectShift={handleSelect} 
-              />
-            } 
-          />
+          <Route path="/schedule" element={<MySchedule schedule={mySchedule} onDropShift={handleDropShift} />} />
+          <Route path="/find-shifts" element={<FindShifts shifts={availableShifts} onSelectShift={handleSelect} />} />
           <Route path="/profile" element={<MyProfile />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
