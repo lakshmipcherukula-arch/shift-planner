@@ -1,9 +1,9 @@
 import Greeting from "./Greeting";
-import "./HomePage.css";
+import "../styles/HomePage.css";
 
 const HomePage = () => {
 
-    const name = "Joe";
+    const name = "Lakshmi";
     
     return(
         <div className="homepage-container">   
@@ -12,7 +12,7 @@ const HomePage = () => {
                     <div className="homepage-messagebox"> 
                         <span>Welcome to Shift Planner Application.</span> 
                         <br/><br/> 
-                        <span>Manage and plan your shifts effortlessly</span>
+                        <span>Manage and plan your shifts effortlessly.</span>
                     </div>
             </div>
         </div>

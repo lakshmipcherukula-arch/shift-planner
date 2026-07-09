@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import './FindShifts.css';
+import '../styles/FindShifts.css';
 
 function FindShifts({shifts,onSelectShift}) {
   const formatShiftDate = (dateString) => {
