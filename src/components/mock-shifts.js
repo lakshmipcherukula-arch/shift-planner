@@ -2,45 +2,87 @@ const mockShifts = [
 
     {
         id: 1,
-        date: '2026-08-07',
-        startTime: '06-00',
-        endTime: '09-00',
-        hours: 3
-    },
-    {
-        id: 2,
-        date: '2026-08-08',
-        startTime: '05-00',
-        endTime: '10-00',
+        date: '2026-07-10',
+        startTime: '01:00',
+        endTime: '06:00',
         hours: 5
     },
     {
+        id: 2,
+        date: '2026-07-10',
+        startTime: '07:00',
+        endTime: '10:00',
+        hours: 3
+    },
+    {
         id: 3,
-        date: '2026-08-09',
-        startTime: '12-00',
-        endTime: '16-00',
+        date: '2026-07-10',
+        startTime: '14:00',
+        endTime: '18:00',
         hours: 4
     },
     {
         id: 4,
-        date: '2026-08-10',
-        startTime: '06-00',
-        endTime: '09-00',
-        hours: 3
+        date: '2026-07-11',
+        startTime: '01:00',
+        endTime: '06:00',
+        hours: 5
     },
     {
         id: 5,
-        date: '2026-08-11',
-        startTime: '05-00',
-        endTime: '09-00',
-        hours: 4
+        date: '2026-07-11',
+        startTime: '07:00',
+        endTime: '10:00',
+        hours: 3
     },
     {
         id: 6,
-        date: '2026-08-12',
-        startTime: '11-00',
-        endTime: '14-00',
+        date: '2026-07-11',
+        startTime: '14:00',
+        endTime: '16:00',
+        hours: 4
+    },
+    {
+        id: 7,
+        date: '2026-07-12',
+        startTime: '01:00',
+        endTime: '06:00',
+        hours: 5
+    },
+    {
+        id: 8,
+        date: '2026-07-12',
+        startTime: '07:00',
+        endTime: '10:00',
         hours: 3
+    },
+    {
+        id: 9,
+        date: '2026-07-12',
+        startTime: '14:00',
+        endTime: '18:00',
+        hours: 4
+    },
+    {
+        id: 10,
+        date: '2026-07-13',
+        startTime: '01:00',
+        endTime: '06:00',
+        hours: 5
+    },
+    {
+        id: 11,
+        date: '2026-07-13',
+        startTime: '07:00',
+        endTime: '10:00',
+        hours: 3
+    },
+    {
+        id: 12,
+        date: '2026-07-13',
+        startTime: '14:00',
+        endTime: '16:00',
+        hours: 4
     }
 ];
 export default mockShifts;
