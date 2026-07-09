@@ -24,8 +24,9 @@ function App() {
   const handleDropShift = (id) =>{
     const shiftToDrop = mySchedule.find((shift) => shift.id === id);
     if(shiftToDrop)
-    setMySchedule(mySchedule.filter((shift) => shift.id !== id));
-    setavailableShifts([...availableShifts,shiftToDrop]);
+      setMySchedule(mySchedule.filter((shift) => shift.id !== id));
+
+     setavailableShifts([...availableShifts, shiftToDrop]);
   };
   return (
     <BrowserRouter>
