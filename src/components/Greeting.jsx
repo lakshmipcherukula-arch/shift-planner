@@ -1,32 +1,31 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 
 const getGreeting = () => {
   const hour = new Date().getHours();
-  
-  if (hour < 12) return 'Good morning';
-  if (hour < 18) return 'Good afternoon';
-  return 'Good evening';
+
+  if (hour < 12) return "Good morning";
+  if (hour < 18) return "Good afternoon";
+  return "Good evening";
 };
 
 const Greeting = (props) => {
+  const [greeting, setGreeting] = useState(getGreeting());
 
-    const [greeting, setGreeting] = useState(getGreeting());
-    
-    useEffect(() => {
-        
-        const interval = setInterval(() => {
-        setGreeting(getGreeting());
-        }, 60000); 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setGreeting(getGreeting());
+    }, 60000);
 
-        return () => clearInterval(interval);
-    }, []);
+    return () => clearInterval(interval);
+  }, []);
 
-    return (
-        <div className="greeting-container">
-        <h3>{greeting}, {props.name}!</h3>
-        </div>
-    );
-
+  return (
+    <div className="greeting-container">
+      <h3>
+        {greeting}, {props.name}!
+      </h3>
+    </div>
+  );
 };
 
 export default Greeting;

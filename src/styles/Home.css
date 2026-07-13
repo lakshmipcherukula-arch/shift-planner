@@ -1,0 +1,46 @@
+.home-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 20px 0;
+  box-sizing: border-box;
+}
+.home-card {
+  background-color: lightblue;
+  padding: 200px 200px;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 800px;
+  width: 100%;
+  border: 1px solid white;
+  box-sizing: border-box;
+}
+
+.home-message-box {
+  background-color: transparent;
+  margin-top: 15px;
+}
+.home-text {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  line-height: 1.6;
+  margin: 0;
+  margin-bottom: 8px;
+}
+.home-subtext {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #666666;
+}
+.greeting-container {
+  color: black;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: -0.5px;
+  margin-bottom: 32px;
+}

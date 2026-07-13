@@ -1,8 +1,12 @@
-import React from "react";
+import React, {useState} from "react";
 import { NavLink } from "react-router-dom";
 import Header from "./Header";
+import "../styles/Layout.css";
+import logo from "../assets/logo.png";
 
 function Layout({ children }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "My Schedule", path: "/schedule" },
@@ -12,14 +16,16 @@ function Layout({ children }) {
   ];
 
   return (
-    <div className="app-container" style={{fontFamily: "sans-serif"}}>
-      <Header/>
-      <nav>
+    <div className="app-container">
+      <Header menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+      <nav className={menuOpen ? "open" : ""}>
+        <div className="nav-links">
         {navLinks.map((link) => (
-          <NavLink key={link.name} to={link.path} style={{ marginRight: "1rem" }}>
+          <NavLink key={link.name} to={link.path} onClick={() => setMenuOpen(false)}>
             {link.name}
           </NavLink>
         ))}
+        </div>
       </nav>
       <main>{children}</main>
     </div>

@@ -1,88 +1,87 @@
 const mockShifts = [
-
-    {
-        id: 1,
-        date: '2026-07-10',
-        startTime: '01:00',
-        endTime: '06:00',
-        hours: 5
-    },
-    {
-        id: 2,
-        date: '2026-07-10',
-        startTime: '07:00',
-        endTime: '10:00',
-        hours: 3
-    },
-    {
-        id: 3,
-        date: '2026-07-10',
-        startTime: '14:00',
-        endTime: '18:00',
-        hours: 4
-    },
-    {
-        id: 4,
-        date: '2026-07-11',
-        startTime: '01:00',
-        endTime: '06:00',
-        hours: 5
-    },
-    {
-        id: 5,
-        date: '2026-07-11',
-        startTime: '07:00',
-        endTime: '10:00',
-        hours: 3
-    },
-    {
-        id: 6,
-        date: '2026-07-11',
-        startTime: '14:00',
-        endTime: '16:00',
-        hours: 4
-    },
-    {
-        id: 7,
-        date: '2026-07-12',
-        startTime: '01:00',
-        endTime: '06:00',
-        hours: 5
-    },
-    {
-        id: 8,
-        date: '2026-07-12',
-        startTime: '07:00',
-        endTime: '10:00',
-        hours: 3
-    },
-    {
-        id: 9,
-        date: '2026-07-12',
-        startTime: '14:00',
-        endTime: '18:00',
-        hours: 4
-    },
-    {
-        id: 10,
-        date: '2026-07-13',
-        startTime: '01:00',
-        endTime: '06:00',
-        hours: 5
-    },
-    {
-        id: 11,
-        date: '2026-07-13',
-        startTime: '07:00',
-        endTime: '10:00',
-        hours: 3
-    },
-    {
-        id: 12,
-        date: '2026-07-13',
-        startTime: '14:00',
-        endTime: '16:00',
-        hours: 4
-    }
+  {
+    id: 1,
+    date: "2026-07-13",
+    startTime: "01:00",
+    endTime: "06:00",
+    hours: 5,
+  },
+  {
+    id: 2,
+    date: "2026-07-13",
+    startTime: "07:00",
+    endTime: "10:00",
+    hours: 3,
+  },
+  {
+    id: 3,
+    date: "2026-07-14",
+    startTime: "14:00",
+    endTime: "18:00",
+    hours: 4,
+  },
+  {
+    id: 4,
+    date: "2026-07-14",
+    startTime: "01:00",
+    endTime: "06:00",
+    hours: 5,
+  },
+  {
+    id: 5,
+    date: "2026-07-15",
+    startTime: "07:00",
+    endTime: "10:00",
+    hours: 3,
+  },
+  {
+    id: 6,
+    date: "2026-07-15",
+    startTime: "14:00",
+    endTime: "16:00",
+    hours: 4,
+  },
+  {
+    id: 7,
+    date: "2026-07-16",
+    startTime: "01:00",
+    endTime: "06:00",
+    hours: 5,
+  },
+  {
+    id: 8,
+    date: "2026-07-16",
+    startTime: "07:00",
+    endTime: "10:00",
+    hours: 3,
+  },
+  {
+    id: 9,
+    date: "2026-07-17",
+    startTime: "14:00",
+    endTime: "18:00",
+    hours: 4,
+  },
+  {
+    id: 10,
+    date: "2026-07-17",
+    startTime: "01:00",
+    endTime: "06:00",
+    hours: 5,
+  },
+  {
+    id: 11,
+    date: "2026-07-18",
+    startTime: "07:00",
+    endTime: "10:00",
+    hours: 3,
+  },
+  {
+    id: 12,
+    date: "2026-07-18",
+    startTime: "14:00",
+    endTime: "16:00",
+    hours: 4,
+  },
 ];
 export default mockShifts;
