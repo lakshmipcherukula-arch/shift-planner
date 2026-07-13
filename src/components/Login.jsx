@@ -1,4 +1,5 @@
 import React,{useState} from "react";
+import "../styles/Login.css";
 
 const Login = ({onLoginSuccess}) => {
 
@@ -29,21 +30,26 @@ const handleSubmit = (e) => {
 
 return(
     <div className="login-container">
-        <form className="login-card" onSubmit={handleSubmit}>
-            <h2> Log In </h2>
-            <p className="login-subtitle"> Use preset details: <strong>user</strong> / <strong>shiftplanner</strong></p>
-            {errorMessage && <div className="error-banner">{errorMessage}</div>}
-            {successMessage && <div className="success-banner">{successMessage}</div>}
-            <div className="input-group">
-                <label>Username:</label>
-                <input type="text"
+        <div className="login-wrapper">
+      
+            <div className="login-header">
+                <h1>Shift Planner</h1>
+            </div>
+            <form className="login-card" onSubmit={handleSubmit}>
+                <h2> Log In </h2>
+                <p className="login-subtitle"> Use preset details: <strong>user</strong> / <strong>shiftplanner</strong></p>
+                {errorMessage && <p className="login-error-msg">{errorMessage}</p>}
+                {successMessage && <p className="login-success-msg">{successMessage}</p>}
+                <div className="input-group">
+                    <label>Username:</label>
+                    <input type="text"
                        value={userName}
                        onChange={(e) => setUserName(e.target.value)}
                        placeholder="Enter username"
                        required
-                />
-            </div>
-            <div className="input-group">
+                    />
+                </div>
+                <div className="input-group">
                 <label>Password:</label>
                 <input type="password"
                        value={password}
@@ -54,7 +60,8 @@ return(
             </div>
             <br/>
             <button type="submit" className="login-btn">Login</button>
-        </form>
+            </form>
+        </div>
     </div>
 );
 };
