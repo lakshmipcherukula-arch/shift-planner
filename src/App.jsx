@@ -7,8 +7,10 @@ import MySchedule from "./components/MySchedule";
 import FindShifts from "./components/FindShifts";
 import MyProfile from "./components/MyProfile";
 import Contact from "./components/Contact";
+import Login from "./components/Login";
 
 function App() {
+  const [isLoggedIn,setIsLoggedIn] = useState(false);
   const [availableShifts, setavailableShifts] = useState(mockShifts);
   const [mySchedule, setMySchedule] = useState([]);
 
@@ -38,6 +40,9 @@ function App() {
       return updatedShifts.sort((a, b) => a.date.localeCompare(b.date));
     });
   };
+  if (!isLoggedIn) {
+    return <Login onLoginSuccess={() => setIsLoggedIn(true)} />;
+  }
   return (
     <BrowserRouter>
       <Layout>
