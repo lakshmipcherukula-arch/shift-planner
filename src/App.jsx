@@ -16,22 +16,28 @@ function App() {
     const shiftToSelect = availableShifts.find((shift) => shift.id === id);
 
     if (shiftToSelect) {
-      setavailableShifts((prevShifts) =>
-        prevShifts.filter((shift) => shift.id !== id),
+      setavailableShifts((currentOpenShifts) =>
+        currentOpenShifts.filter((shift) => shift.id !== id),
       );
-      setMySchedule((prevSchedule) => [...prevSchedule, shiftToSelect]);
+      setMySchedule((currentMySchedule) => [...currentMySchedule, shiftToSelect]);
       alert("Shift selected successfully");
     }
   };
   
   const handleDropShift = (id) => {
     const shiftToDrop = mySchedule.find((shift) => shift.id === id);
-    if (shiftToDrop)
-      setMySchedule(mySchedule.filter((shift) => shift.id !== id));
+    if (!shiftToDrop) return; 
 
-    setavailableShifts([...availableShifts, shiftToDrop]);
+    setMySchedule((currentMySchedule) => 
+      currentMySchedule.filter((shift) => shift.id !== id)
+    );
+
+    setavailableShifts((currentOpenShifts) => {
+      const updatedShifts = [...currentOpenShifts, shiftToDrop];
+      
+      return updatedShifts.sort((a, b) => a.date.localeCompare(b.date));
+    });
   };
-
   return (
     <BrowserRouter>
       <Layout>
