@@ -1,4 +1,5 @@
 import React,{useState} from "react";
+import "../styles/MyProfile.css";
 
 function MyProfile() {
   
@@ -9,7 +10,7 @@ const employee = {
   Workplace: "ABC Warehouse"
 };
 
-const [address,setAddress] = useState("123 Manchester Rd,Manchester,MO");
+const [address,setAddress] = useState("123 Manchester Rd, Manchester, MO");
 const [isEditing,setIsEditing] = useState(false);
 const [tempAddress,setTempAddress] = useState(address);
 
@@ -27,10 +28,10 @@ return(
     <hr className="divider" />
     <div className="profile-card">
       <div className="profile-details">
-        <p><strong>Employee Name:</strong>{employee.name}</p>
-        <p><strong>Employee Id:</strong>{employee.employeeId}</p>
-        <p><strong>Employee Role:</strong>{employee.role}</p>
-        <p><strong>Employee Workplace:</strong>{employee.Workplace}</p>
+        <p><strong>Employee Name:</strong> {employee.name} </p>
+        <p><strong>Employee Id:</strong> {employee.employeeId} </p>
+        <p><strong>Employee Role:</strong> {employee.role} </p>
+        <p><strong>Employee Workplace:</strong> {employee.Workplace} </p>
 
         <hr className="inner-divider"/>
         <div className="address-section">
