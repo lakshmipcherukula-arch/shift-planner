@@ -48,7 +48,7 @@ const Header = ({ menuOpen, setMenuOpen }) => {
           cursor: "pointer"
         }}
       >
-        {menuOpen ? "✕" : "☰"}
+        {menuOpen ? "X" : "☰"} 
       </button>
     </header>
   );
