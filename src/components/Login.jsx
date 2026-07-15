@@ -1,5 +1,6 @@
 import React,{useState} from "react";
 import "../styles/Login.css";
+import Button from "./Button";
 
 const Login = ({onLoginSuccess}) => {
 
@@ -7,6 +8,7 @@ const [userName,setUserName] = useState("");
 const [password,setPassword] = useState("");
 const [errorMessage,setErrorMessage] = useState("");
 const [successMessage,setSuccessMessage] = useState("");
+const [isLoggingIn, setIsLoggingIn] = useState(false);
 
 
 const preset_user = "user";
@@ -18,9 +20,12 @@ const handleSubmit = (e) => {
     if(userName === preset_user && password === preset_password){
         setErrorMessage("");
         setSuccessMessage("Login Successful! Redirecting to the home page...");
-    setTimeout(() => {
+        setIsLoggingIn(true);
+
+        setTimeout(() => {
         if(onLoginSuccess) onLoginSuccess();
-    }, 1500); 
+        setIsLoggingIn(false);
+    }, 2500); 
 
     }else {
         setSuccessMessage("");
@@ -59,7 +64,8 @@ return(
                 />
             </div>
             <br/>
-            <button type="submit" className="login-btn">Login</button>
+            <Button type="submit" isLoading={isLoggingIn} 
+            style={{ width: "100%" }}>Login</Button>
             </form>
         </div>
     </div>

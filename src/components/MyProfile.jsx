@@ -6,7 +6,7 @@ function MyProfile() {
 const employee = {
   name: "Lakshmi",
   employeeId: "Lakshmi2026",
-  role: "Stower/Picker",
+  role: "Associate",
   Workplace: "ABC Warehouse"
 };
 

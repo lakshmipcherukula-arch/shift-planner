@@ -1,4 +1,5 @@
 import React,{useState}from "react";
+import Button from "./Button"; 
 
 function Contact() {
   const [subject, setSubject] = useState("");
@@ -53,7 +54,7 @@ function Contact() {
         </div>
 
         <div>
-          <button type="submit" style={{backgroundColor: "lightskyblue"}}>Send Message</button>
+          <Button type="submit" style={{backgroundColor: "lightskyblue"}}>Send Message</Button>
         </div>
       </form>
     </div>
