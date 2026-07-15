@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../styles/FindShifts.css";
+import Button from "./Button";
 
 function FindShifts({ shifts, onSelectShift }) {
   const formatShiftDate = (dateString) => {
@@ -40,7 +41,7 @@ function FindShifts({ shifts, onSelectShift }) {
                 <strong>Hours:</strong>
                 {shift.hours}
               </p>
-              <button
+              {/* <button
                 onClick={() => onSelectShift(shift.id)}
                 style={{
                   backgroundColor: "blue",
@@ -54,7 +55,25 @@ function FindShifts({ shifts, onSelectShift }) {
               >
                 {" "}
                 Select Shift
-              </button>
+              </button> */}
+              <Button 
+                type="submit" 
+                className="login-btn" 
+                onClick={() => onSelectShift(shift.id)}
+                style={{
+                  backgroundColor: "blue",
+                  color: "white",
+                  border: "none",
+                  padding: "0.5rem 1rem",
+                  borderRadius: "4px",
+                  cursor: "pointer",
+                  fontWeight: "bold",
+                }}
+              >
+                {" "}
+                Select Shift
+              </Button>
+
             </div>
           ))}
         </div>

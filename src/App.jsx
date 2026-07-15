@@ -8,6 +8,7 @@ import FindShifts from "./components/FindShifts";
 import MyProfile from "./components/MyProfile";
 import Contact from "./components/Contact";
 import Login from "./components/Login";
+import Button from "./components/Button"
 
 function App() {
   const [isLoggedIn,setIsLoggedIn] = useState(false);
@@ -22,7 +23,6 @@ function App() {
         currentOpenShifts.filter((shift) => shift.id !== id),
       );
       setMySchedule((currentMySchedule) => [...currentMySchedule, shiftToSelect]);
-      alert("Shift selected successfully");
     }
   };
   
