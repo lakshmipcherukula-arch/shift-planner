@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import Header from "./Header";
 import "../styles/Layout.css";
 import logo from "../assets/logo.png";
+import Footer from "./Footer";
 
 function Layout({ children }) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -28,6 +29,7 @@ function Layout({ children }) {
         </div>
       </nav>
       <main>{children}</main>
+      <Footer/>
     </div>
   );
 }
