@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import "../styles/FindShifts.css";
 import Button from "./Button";
 
-function FindShifts({ shifts, onSelectShift }) {
+function FindShifts({ shifts,assignedShifts=[], onSelectShift }) {
+  
+  const [conflictShiftId,setConflictShiftId] = useState(null);
+  const [successMessage, setSuccessMessage] = useState("");
+
   const formatShiftDate = (dateString) => {
     if (!dateString) return "";
     const dateObj = new Date(dateString + "T00:00:00");
@@ -13,69 +17,100 @@ function FindShifts({ shifts, onSelectShift }) {
     });
   };
 
-  return (
+  const handleSelectClick = (selectedShift) => {
+    const hasConflict = assignedShifts.some((assigned) => {
+    return (
+      assigned.date === selectedShift.date &&
+      assigned.startTime < selectedShift.endTime &&
+      selectedShift.startTime < assigned.endTime
+  );
+  });
+
+  if (hasConflict) {
+      setConflictShiftId(selectedShift.id);
+      setTimeout(() => {
+        setConflictShiftId(null);
+      }, 5000);
+      return; 
+    }
+    onSelectShift(selectedShift.id);
+    setSuccessMessage("Shift added to schedule successfully!");
+      setTimeout(() => {
+        setSuccessMessage("");
+        }, 3000); 
+};  
+
+return (
     <div className="findshifts-container">
       <h2> Available Shifts</h2>
+
+      {successMessage && (
+        <div style={{
+          backgroundColor: "#d4edda", 
+          color: "#155724",           
+          padding: "10px",
+          borderRadius: "5px",
+          textAlign: "center",
+          fontWeight: "bold",
+          marginBottom: "15px"
+        }}>
+          {successMessage}
+        </div>
+      )}
       {shifts.length === 0 ? (
         <p style={{ textAlign: "center", color:"gray" }}>
           No shifts available.
         </p>
-      ) : (
-        <div className="shifts-list">
-          {shifts.map((shift) => (
-            <div key={shift.id} className="shift-card">
-              <h3
-                className="shift-card-date"
-                style={{ color: "blue", margin: "0 0 10px 0" }}
-              >
+        ) : (
+          <div className="shifts-list">
+            {shifts.map((shift) => {
+                const isConflicting = conflictShiftId === shift.id;
+              return( 
+               <div key={shift.id} className="shift-card">
+                <h3
+                  className="shift-card-date"
+                  style={{ color: "blue", margin: "0 0 10px 0" }}
+                >
                 {formatShiftDate(shift.date)}
-              </h3>
-              <p>
-                <strong>Start Time:</strong> {shift.startTime}
-              </p>
-              <p>
-                <strong>End Time:</strong>
-                {shift.endTime}
-              </p>
-              <p>
-                <strong>Hours:</strong>
-                {shift.hours}
-              </p>
-              {/* <button
-                onClick={() => onSelectShift(shift.id)}
-                style={{
-                  backgroundColor: "blue",
+                </h3>
+                <p>
+                  <strong>Start Time:</strong> {shift.startTime}
+                </p>
+                <p>
+                  <strong>End Time:</strong>
+                  {shift.endTime}
+                </p>
+                <p>
+                 <strong>Hours:</strong>
+                  {shift.hours}
+                </p>
+                {isConflicting && (
+                  <p style={{ color: "red", fontWeight: "bold", fontSize: "0.85rem", margin: "10px 0" }}>
+                     Overlaps with an existing shift on your schedule!
+                  </p>
+                )}
+                
+                <Button 
+                 type="button" 
+                 className="login-btn" 
+                 onClick={() => handleSelectClick(shift)}
+                 style={{
+                  backgroundColor: isConflicting ? "gray" : "blue",
                   color: "white",
                   border: "none",
                   padding: "0.5rem 1rem",
                   borderRadius: "4px",
-                  cursor: "pointer",
+                  cursor: isConflicting ? "not-allowed" : "pointer",
                   fontWeight: "bold",
                 }}
+                disabled={isConflicting}
               >
-                {" "}
-                Select Shift
-              </button> */}
-              <Button 
-                type="submit" 
-                className="login-btn" 
-                onClick={() => onSelectShift(shift.id)}
-                style={{
-                  backgroundColor: "blue",
-                  color: "white",
-                  border: "none",
-                  padding: "0.5rem 1rem",
-                  borderRadius: "4px",
-                  cursor: "pointer",
-                  fontWeight: "bold",
-                }}
-              >
-                {" "}
-                Select Shift
-              </Button>
+                Select Shift              
+                </Button>
 
             </div>
-          ))}
+            );
+          })}
         </div>
       )}
     </div>

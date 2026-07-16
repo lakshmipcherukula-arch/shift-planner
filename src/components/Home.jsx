@@ -9,10 +9,9 @@ const Home = () => {
       <div className="home-card">
         <Greeting name={name} />
         <div className="home-messagebox">
-          <span>Welcome to Shift Planner Application.</span>
-          <br />
-          <br />
-          <span>Manage and plan your shifts effortlessly.</span>
+          <p>Welcome to Shift Planner Application.</p>
+          <br/>
+          <p>Manage and plan your shifts effortlessly.</p>
         </div>
       </div>
     </div>

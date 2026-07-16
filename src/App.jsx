@@ -60,6 +60,7 @@ function App() {
             element={
               <FindShifts
                 shifts={availableShifts}
+                assignedShifts={mySchedule}
                 onSelectShift={handleSelect}
               />
             }

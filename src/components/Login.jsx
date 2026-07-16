@@ -42,7 +42,8 @@ return(
             </div>
             <form className="login-card" onSubmit={handleSubmit}>
                 <h2> Log In </h2>
-                <p className="login-subtitle">Use preset login details: <strong>user</strong> and <strong>shiftplanner</strong></p>
+                <p className="login-subtitle"><strong>Username: user</strong> 
+                <br/> <strong>Password: shiftplanner</strong></p>
                 {errorMessage && <p className="login-error-msg">{errorMessage}</p>}
                 {successMessage && <p className="login-success-msg">{successMessage}</p>}
                 <div className="input-group">

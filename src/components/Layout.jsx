@@ -13,7 +13,7 @@ function Layout({ children }) {
     { name: "My Schedule", path: "/schedule" },
     { name: "Find Shifts", path: "/find-shifts" },
     { name: "My Profile", path: "/profile" },
-    { name: "Contact us", path: "/contact" },
+    { name: "Contact Us", path: "/contact" },
   ];
 
   return (
