@@ -1,3 +1,4 @@
+
 .home-container {
   display: flex;
   justify-content: center;
@@ -16,16 +17,17 @@
   border: 1px solid white;
   box-sizing: border-box;
 }
-
-.home-message-box {
-  background-color: transparent;
+.home-messagebox {
+  background-color:transparent;
   margin-top: 15px;
+  font-size: large;
+  color: darkblue;
 }
 .home-text {
   font-size: 1.5rem;
   font-weight: 600;
   color: #1a1a1a;
-  line-height: 1.6;
+  line-height: 2;
   margin: 0;
   margin-bottom: 8px;
 }
@@ -34,10 +36,10 @@
   margin-top: 10px;
   font-size: 1.5rem;
   font-weight: 400;
-  color: #666666;
+  color:gray;
 }
 .greeting-container {
-  color: black;
+  color: darkblue;
   font-size: 1.5rem;
   font-weight: 700;
   margin: 0;
