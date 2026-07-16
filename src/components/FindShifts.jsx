@@ -2,10 +2,15 @@ import React, { useState } from "react";
 import "../styles/FindShifts.css";
 import Button from "./Button";
 
+//Displays a list of unassigned open shifts
+
 function FindShifts({ shifts,assignedShifts=[], onSelectShift }) {
   
   const [conflictShiftId,setConflictShiftId] = useState(null);
   const [successMessage, setSuccessMessage] = useState("");
+
+  //Helper function to format ISO date strings (YYYY-MM-DD).
+  //Appending 'T00:00:00' prevents timezone shifts from offsetting the local date.
 
   const formatShiftDate = (dateString) => {
     if (!dateString) return "";
@@ -17,6 +22,8 @@ function FindShifts({ shifts,assignedShifts=[], onSelectShift }) {
     });
   };
 
+  //Checking for overlapping/conflict shifts
+
   const handleSelectClick = (selectedShift) => {
     const hasConflict = assignedShifts.some((assigned) => {
     return (
@@ -25,7 +32,6 @@ function FindShifts({ shifts,assignedShifts=[], onSelectShift }) {
       selectedShift.startTime < assigned.endTime
   );
   });
-
   if (hasConflict) {
       setConflictShiftId(selectedShift.id);
       setTimeout(() => {
@@ -33,7 +39,9 @@ function FindShifts({ shifts,assignedShifts=[], onSelectShift }) {
       }, 5000);
       return; 
     }
-    onSelectShift(selectedShift.id);
+
+  //otherwise, execute shift selection and show success message
+  onSelectShift(selectedShift.id);
     setSuccessMessage("Shift added to schedule successfully!");
       setTimeout(() => {
         setSuccessMessage("");
@@ -92,7 +100,6 @@ return (
                 
                 <Button 
                  type="button" 
-                 className="login-btn" 
                  onClick={() => handleSelectClick(shift)}
                  style={{
                   backgroundColor: isConflicting ? "gray" : "blue",

@@ -2,8 +2,9 @@ import React, {useState} from "react";
 import { NavLink } from "react-router-dom";
 import Header from "./Header";
 import "../styles/Layout.css";
-import logo from "../assets/logo.png";
 import Footer from "./Footer";
+
+//Acts as a structural wrapper for the entire application.
 
 function Layout({ children }) {
   const [menuOpen, setMenuOpen] = useState(false);
