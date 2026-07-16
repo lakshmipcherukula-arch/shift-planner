@@ -1,64 +1,93 @@
-import React,{useState}from "react";
+import React, { useState } from "react";
 import Button from "./Button"; 
+import "../styles/Contact.css";
 
 function Contact() {
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
-  const [isSent,setIsSent] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSent, setIsSent] = useState(false); 
 
-  const handleSubmit = (e) =>{
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setIsSent(true);
+    setIsSubmitting(true); 
+
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setIsSent(true);
+      setSubject("");
+      setMessage("");
+    }, 1500);
   };
   if (isSent) {
     return (
-      <div className="contact-container">
+      <div className="contact-page">
         <h1>Contact Us</h1>
-        <div style={{ justifyContent: "center", padding: "1.5rem" }}>
-          <p style={{ color: "blue", fontWeight: "bold", margin: 0 }}>
-            Message sent successfully!
-          </p>
-        </div>
+        <hr />
+        <br />
+        <p className="success-message">Message sent successfully!</p>
       </div>
     );
   }
+
   return (
-    
-    <div>
+    <div className="contact-page">
       <h1>Contact Us</h1>
-      <hr className="divider" />
+      <hr />
+      <br/>
       
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="subject"><strong>Subject:</strong></label>
-          <input 
-            type="text" 
-            id="subject" 
-            value={subject}
-            onChange={(e) => setSubject(e.target.value)}
-            placeholder="Shift error,Leave request,Website issue" 
-            required 
-          />
-        </div>
+        <label><strong>Subject:</strong></label>
+        <input 
+          type="text" 
+          value={subject}
+          onChange={(e) => setSubject(e.target.value)}
+          placeholder="Shift error,Leave Request" 
+          required 
+        />
 
-        <div>
-          <label htmlFor="message"><strong>Message:</strong></label>
-          <textarea 
-            id="message" 
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            placeholder="Write your message here..." 
-            rows="5" 
-            required 
-          />
-        </div>
+        <label><strong>Message:</strong></label>
+        <textarea 
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          placeholder="Write your message here..." 
+          rows="4" 
+          required 
+        />
 
-        <div>
-          <Button type="submit" style={{backgroundColor: "lightskyblue"}}>Send Message</Button>
-        </div>
+        <Button type="submit" isLoading={isSubmitting}>
+          Send Message
+        </Button>
       </form>
+      <h3>Guidelines:</h3>
+      <br/>
+      <ul>
+        <li>Check your schedule before messaging.</li>
+        <li>We reply within 24 hours.</li>
+      </ul>
+       <br/>
+
+      <h3>Directory</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Team</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Support</td>
+            <td>help@shiftplanner.com</td>
+          </tr>
+          <tr>
+            <td>Manager</td>
+            <td>manager@shiftplanner.com</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   );
-};
+}
 
 export default Contact;
