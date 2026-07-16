@@ -22,26 +22,6 @@ nav {
   flex-shrink: 0;
   justify-content: center; 
 }
-
-.navbar-logo-container {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  height: 100%;
-}
-
-.navbar-logo {
-  height: 36px;       
-  width: auto;        
-  margin-right: 12px; 
-}
-
-.navbar-brand-name {
-  font-weight: 700;
-  font-size: 1.2rem;
-  color: midnightblue;     
-}
-
 .nav-links {
   display: flex;
   height: 100%;

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Button from "./Button"; 
 import "../styles/Contact.css";
 
+//Allows users (employees) to send support messages or leave requests
 function Contact() {
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");

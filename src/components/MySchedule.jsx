@@ -1,22 +1,28 @@
 import React, { useState } from "react";
-import Calendar from "react-calendar";
+import Calendar from "react-calendar";//Installed react-calendar library
 import "react-calendar/dist/calendar.css";
 
+//Provides an interactive calendar interface where employees can select a date to view their assigned shifts for that day. 
+//It also allows users to "drop" an assigned shift.
+
 function MySchedule({ schedule, onDropShift }) {
+  //Validation: Ensures schedule is always treated as an array, avoiding runtime crashes
   const selectedShifts = Array.isArray(schedule) ? schedule : [];
 
   const [selectedDate, setSelectedDate] = useState(new Date());
   
   const formatCalendarDate = (dateObj) => {
     const year = dateObj.getFullYear();
-    const month = String(dateObj.getMonth() + 1).padStart(2, "0");
+    const month = String(dateObj.getMonth() + 1).padStart(2, "0");// padding ensures single digit months and days are formatted as "01", "02"
     const day = String(dateObj.getDate()).padStart(2, "0");
     return `${year}-${month}-${day}`;
   };
 
   const formattedDateString = formatCalendarDate(selectedDate);
 
-  const displayedShifts = selectedShifts.filter(
+//Filters the user's schedule to only display shifts scheduled for the active calendar date
+  
+const displayedShifts = selectedShifts.filter(
     (shift) => shift.date === formattedDateString,
   );
 
