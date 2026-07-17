@@ -8,7 +8,7 @@ import FindShifts from "./components/FindShifts";
 import MyProfile from "./components/MyProfile";
 import Contact from "./components/Contact";
 import Login from "./components/Login";
-import Button from "./components/Button"
+//import Button from "./components/Button"
 
 function App() {
   const [isLoggedIn,setIsLoggedIn] = useState(false);

@@ -28,7 +28,7 @@ const displayedShifts = selectedShifts.filter(
 
   return (
     <div className="myschedule-container" style={{ padding: "1rem" }}>
-      <h2>My Schedule (Calendar View)</h2>
+      <h2 style={{color: "navy"}}>My Schedule (Calendar View):</h2>
 
       <div
         style={{
@@ -41,10 +41,10 @@ const displayedShifts = selectedShifts.filter(
       </div>
 
       <div className="shifts-section">
-        <h3>Shifts for {formattedDateString}:</h3>
-
+        <h3 style={{color:"navy"}}>Shifts for {formattedDateString}:</h3>
+        <br/>
         {displayedShifts.length === 0 ? (
-          <p>No shifts scheduled for this day.</p>
+          <p style={{color:"navy", fontSize:"large"}}>No shifts scheduled for this day.</p>
         ) : (
           displayedShifts.map((shift) => (
             <div
