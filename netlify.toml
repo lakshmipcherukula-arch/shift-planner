@@ -1,0 +1,4 @@
+[build]
+    base = "shift-planner"
+    command = "npm run build"
+    public = "dist"
