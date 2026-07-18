@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "../styles/FindShifts.css";
 import Button from "./Button";
 
