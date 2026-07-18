@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Calendar from "react-calendar";//Installed react-calendar library
 import "react-calendar/dist/calendar.css";
 

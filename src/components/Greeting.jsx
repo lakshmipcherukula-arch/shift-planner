@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 //Displays a personalized, time-sensitive greeting to the user.
 const getGreeting = () => {
