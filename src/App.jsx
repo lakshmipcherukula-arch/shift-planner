@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import mockShifts from "./components/mock-shifts";
+//import mockShifts from "./components/mock-shifts";
 import Home from "./components/Home";
 import Layout from "./components/Layout";
 import MySchedule from "./components/MySchedule";
@@ -10,37 +10,118 @@ import Contact from "./components/Contact";
 import Login from "./components/Login";
 
 function App() {
-  const [isLoggedIn,setIsLoggedIn] = useState(false);
-  const [availableShifts, setavailableShifts] = useState(mockShifts);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userId, setUserId] = useState(null);
+  const [availableShifts, setavailableShifts] = useState([]);
   const [mySchedule, setMySchedule] = useState([]);
 
-  const handleSelect = (id) => {
-    const shiftToSelect = availableShifts.find((shift) => shift.id === id);
+  useEffect(() => {
+    fetch("/shifts")
+      .then((res) => {
+        if (!res.ok) throw new Error("Unable to fetch shifts");
+        return res.json();
+      })
+      .then((data) => setavailableShifts(data))
+      .catch((err) => console.error("Error fetching shifts:", err));
+  }, []);
 
-    if (shiftToSelect) {
-      setavailableShifts((currentOpenShifts) =>
-        currentOpenShifts.filter((shift) => shift.id !== id),
-      );
-      setMySchedule((currentMySchedule) => [...currentMySchedule, shiftToSelect]);
+  useEffect(() => {
+    if (userId === null) return;
+
+    fetch(`/schedules/users/${userId}`)
+      .then((res) => {
+        if (!res.ok) throw new Error("Unable to fetch schedule");
+        return res.json();
+      })
+      .then((schedule) => setMySchedule(schedule.shifts || []))
+      .catch((err) => console.error("Error fetching schedule:", err));
+  }, [userId]);
+
+  const handleLoginSuccess = async () => {
+    try {
+      const response = await fetch("/users");
+      if (!response.ok) throw new Error("Unable to fetch users");
+
+      const users = await response.json();
+      const loggedInUser =
+        users.find((user) => user.username === "user") || users[0];
+      if (!loggedInUser) throw new Error("Logged-in user was not found");
+
+      setUserId(loggedInUser.userId);
+      setIsLoggedIn(true);
+    } catch (err) {
+      console.error("Error loading logged-in user:", err);
     }
   };
-  
-  const handleDropShift = (id) => {
-    const shiftToDrop = mySchedule.find((shift) => shift.id === id);
-    if (!shiftToDrop) return; 
 
-    setMySchedule((currentMySchedule) => 
-      currentMySchedule.filter((shift) => shift.id !== id)
+  const updateSchedule = async (id, method) => {
+    if (userId === null) return false;
+
+    const response = await fetch(
+      `/schedules/users/${userId}/shifts/${id}`,
+      { method },
     );
 
-    setavailableShifts((currentOpenShifts) => {
-      const updatedShifts = [...currentOpenShifts, shiftToDrop];
-      
-      return updatedShifts.sort((a, b) => a.date.localeCompare(b.date));
-    });
+    if (!response.ok) {
+      throw new Error(`Unable to ${method === "POST" ? "select" : "drop"} shift ${id}`);
+    }
+
+    return true;
   };
+
+  const handleSelect = async (id) => {
+    const shiftToSelect = availableShifts.find(
+      (shift) => (shift.shiftId || shift.id) === id
+    );
+
+    if (shiftToSelect) {
+      try {
+        await updateSchedule(id, "POST");
+        setavailableShifts((currentOpenShifts) =>
+          currentOpenShifts.filter(
+            (shift) => (shift.shiftId || shift.id) !== id
+          )
+        );
+
+        setMySchedule((currentMySchedule) => [
+          ...currentMySchedule,
+          { ...shiftToSelect, isAvailable: false },
+        ]);
+        return true;
+      } catch (err) {
+        console.error("Error selecting shift:", err);
+        return false;
+      }
+    }
+
+    return false;
+  };
+  
+  const handleDropShift = async (id) => {
+    const shiftToDrop = mySchedule.find(
+      (shift) => (shift.shiftId || shift.id) === id
+    );
+
+    if (!shiftToDrop) return false;
+
+    try {
+      await updateSchedule(id, "DELETE");
+      setMySchedule((currentMySchedule) =>
+        currentMySchedule.filter((shift) => (shift.shiftId || shift.id) !== id)
+      );
+      setavailableShifts((currentOpenShifts) => [
+        ...currentOpenShifts,
+        { ...shiftToDrop, isAvailable: true },
+      ]);
+      return true;
+    } catch (err) {
+      console.error("Error dropping shift:", err);
+      return false;
+    }
+  };
+
   if (!isLoggedIn) {
-    return <Login onLoginSuccess={() => setIsLoggedIn(true)} />;
+    return <Login onLoginSuccess={handleLoginSuccess} />;
   }
   return (
     <BrowserRouter>

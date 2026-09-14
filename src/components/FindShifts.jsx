@@ -8,45 +8,61 @@ function FindShifts({ shifts,assignedShifts=[], onSelectShift }) {
   
   const [conflictShiftId,setConflictShiftId] = useState(null);
   const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   //Helper function to format ISO date strings (YYYY-MM-DD).
   //Appending 'T00:00:00' prevents timezone shifts from offsetting the local date.
 
   const formatShiftDate = (dateString) => {
     if (!dateString) return "";
-    const dateObj = new Date(dateString + "T00:00:00");
-    return dateObj.toLocaleDateString("en-US", {
-      weekday: "long",
-      month: "short",
-      day: "numeric",
-    });
-  };
+
+    let dateObj;
+      if (typeof dateString === "string" && dateString.includes("T")) {
+    // Handles ISO/Java Date timestamp format
+      dateObj = new Date(dateString);
+      } else {
+    // Handles simple date string format: "2026-07-22"
+      dateObj = new Date(dateString + "T00:00:00");
+      }
+      return dateObj.toLocaleDateString("en-US", {
+        weekday: "long",
+        month: "short",
+        day: "numeric",
+      });
+};
 
   //Checking for overlapping/conflict shifts
 
-  const handleSelectClick = (selectedShift) => {
+  const handleSelectClick = async (selectedShift) => {
     const hasConflict = assignedShifts.some((assigned) => {
-    return (
-      assigned.date === selectedShift.date &&
-      assigned.startTime < selectedShift.endTime &&
-      selectedShift.startTime < assigned.endTime
-  );
-  });
-  if (hasConflict) {
-      setConflictShiftId(selectedShift.id);
-      setTimeout(() => {
-        setConflictShiftId(null);
-      }, 5000);
-      return; 
+      return (
+        assigned.date === selectedShift.date &&
+        assigned.startTime < selectedShift.endTime &&
+        selectedShift.startTime < assigned.endTime
+      );
+    });
+
+    if (hasConflict) {
+        setConflictShiftId(selectedShift.id);
+        setTimeout(() => {
+          setConflictShiftId(null);
+        }, 5000);
+        return; 
     }
 
-  //otherwise, execute shift selection and show success message
-  onSelectShift(selectedShift.id);
+    //otherwise, execute shift selection and show success message
+    const selected = await onSelectShift(selectedShift.shiftId || selectedShift.id);
+    if (!selected) {
+      setErrorMessage("Unable to add shift. Please try again.");
+      setTimeout(() => setErrorMessage(""), 3000);
+      return;
+    }
+
     setSuccessMessage("Shift added to schedule successfully!");
-      setTimeout(() => {
-        setSuccessMessage("");
-        }, 3000); 
-};  
+    setTimeout(() => {
+      setSuccessMessage("");
+      }, 3000); 
+  };  
 
 return (
     <div className="findshifts-container">
@@ -72,9 +88,10 @@ return (
         ) : (
           <div className="shifts-list">
             {shifts.map((shift) => {
-                const isConflicting = conflictShiftId === shift.id;
+                const shiftId = shift.shiftId || shift.id;
+                const isConflicting = conflictShiftId === shiftId;
               return( 
-               <div key={shift.id} className="shift-card">
+               <div key={shiftId} className="shift-card">
                 <h3
                   className="shift-card-date"
                   style={{ color: "blue", margin: "0 0 10px 0" }}
@@ -118,6 +135,11 @@ return (
             </div>
             );
           })}
+          {errorMessage && (
+            <div style={{ color: "red", textAlign: "center", marginBottom: "15px" }}>
+              {errorMessage}
+            </div>
+          )}
         </div>
       )}
     </div>
