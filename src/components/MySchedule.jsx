@@ -48,7 +48,7 @@ const displayedShifts = selectedShifts.filter(
         ) : (
           displayedShifts.map((shift) => (
             <div
-              key={shift.id}
+              key={shift.shiftId || shift.id}
               style={{
                 borderLeft: "5px solid blue",
                 padding: "12px",
@@ -66,7 +66,7 @@ const displayedShifts = selectedShifts.filter(
                 <strong>Hours:</strong> {shift.hours} hrs
               </p>
               <button
-                onClick={() => onDropShift(shift.id)}
+                onClick={() => onDropShift(shift.shiftId || shift.id)}
                 style={{
                   backgroundColor: "red",
                   color: "white",
