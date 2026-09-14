@@ -33,7 +33,10 @@ function FindShifts({ shifts,assignedShifts=[], onSelectShift }) {
 
   //Checking for overlapping/conflict shifts
 
-  const handleSelectClick = async (selectedShift) => {
+ const handleSelectClick = (selectedShift) => {
+    // Standardize ID lookup to support shiftId or id
+    const currentShiftId = selectedShift.shiftId || selectedShift.id;
+
     const hasConflict = assignedShifts.some((assigned) => {
       return (
         assigned.date === selectedShift.date &&
@@ -43,7 +46,7 @@ function FindShifts({ shifts,assignedShifts=[], onSelectShift }) {
     });
 
     if (hasConflict) {
-        setConflictShiftId(selectedShift.id);
+        setConflictShiftId(currentShiftId);
         setTimeout(() => {
           setConflictShiftId(null);
         }, 5000);
@@ -51,12 +54,13 @@ function FindShifts({ shifts,assignedShifts=[], onSelectShift }) {
     }
 
     //otherwise, execute shift selection and show success message
-    const selected = await onSelectShift(selectedShift.shiftId || selectedShift.id);
-    if (!selected) {
-      setErrorMessage("Unable to add shift. Please try again.");
-      setTimeout(() => setErrorMessage(""), 3000);
-      return;
-    }
+    onSelectShift(currentShiftId);
+    // const selected = await onSelectShift(selectedShift.shiftId || selectedShift.id);
+    // if (!selected) {
+    //   setErrorMessage("Unable to add shift. Please try again.");
+    //   setTimeout(() => setErrorMessage(""), 3000);
+    //   return;
+    // }
 
     setSuccessMessage("Shift added to schedule successfully!");
     setTimeout(() => {
