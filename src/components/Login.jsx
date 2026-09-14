@@ -1,4 +1,5 @@
 import {useState} from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/Login.css";
 import Button from "./Button";
 
@@ -10,6 +11,7 @@ const [errorMessage,setErrorMessage] = useState("");
 const [successMessage,setSuccessMessage] = useState("");
 const [isLoggingIn, setIsLoggingIn] = useState(false);
 
+const navigate = useNavigate();
 
 const preset_user = "user";
 const preset_password = "shiftplanner";
@@ -23,8 +25,11 @@ const handleSubmit = (e) => {
         setIsLoggingIn(true);
 
         setTimeout(() => {
-        if(onLoginSuccess) onLoginSuccess();
-        setIsLoggingIn(false);
+        setIsLoggingIn(false)
+        if(onLoginSuccess){
+            onLoginSuccess();
+        }
+        navigate("/");
     }, 2500); 
 
     }else {
