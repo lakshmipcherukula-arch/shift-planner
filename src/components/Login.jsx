@@ -25,8 +25,10 @@ const handleSubmit = (e) => {
         setIsLoggingIn(true);
 
         setTimeout(() => {
-        if(onLoginSuccess) onLoginSuccess();
-        setIsLoggingIn(false);
+        setIsLoggingIn(false)
+        if(onLoginSuccess){
+            onLoginSuccess();
+        }
         navigate("/");
     }, 2500); 
 

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 //import mockShifts from "./components/mock-shifts";
 import Home from "./components/Home";
 import Layout from "./components/Layout";
@@ -121,10 +121,16 @@ function App() {
   };
 
   if (!isLoggedIn) {
-    return <Login onLoginSuccess={handleLoginSuccess} />;
-  }
+return (
+      <Routes>
+        <Route
+          path="*"
+          element={<Login onLoginSuccess={handleLoginSuccess} />}
+        />
+      </Routes>
+    );
+  }  
   return (
-    <BrowserRouter>
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -149,7 +155,6 @@ function App() {
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </Layout>
-    </BrowserRouter>
   );
 }
 
